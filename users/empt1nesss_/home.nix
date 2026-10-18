@@ -18,16 +18,29 @@ in
     EDITOR = "nvim";
   };
 
+  home.file."Downloads".source = config.lib.file.mkOutOfStoreSymlink "/mnt/win/D/Home/${config.home.username}/Downloads";
+  home.file."Documents".source = config.lib.file.mkOutOfStoreSymlink "/mnt/win/D/Home/${config.home.username}/Documents";
+  home.file."Music".source = config.lib.file.mkOutOfStoreSymlink "/mnt/win/D/Home/${config.home.username}/Music";
+  home.file."Pictures".source = config.lib.file.mkOutOfStoreSymlink "/mnt/win/D/Home/${config.home.username}/Pictures";
+  home.file."Videos".source = config.lib.file.mkOutOfStoreSymlink "/mnt/win/D/Home/${config.home.username}/Videos";
+
+  xdg.configFile."autostart".source =
+    config.lib.file.mkOutOfStoreSymlink "/etc/nixos/users/${config.home.username}/autostart";
+
+  dconf.settings = {
+    "org/gnome/desktop/background" = {
+      picture-uri-dark = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+    };
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
   gtk = {
     enable = true;
     theme = {
       name = "Adwaita-dark";
-      package = pkgs.adwaita-icon-theme;
-    };
-  };
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
+      package = pkgs.gnome-themes-extra;
     };
   };
 

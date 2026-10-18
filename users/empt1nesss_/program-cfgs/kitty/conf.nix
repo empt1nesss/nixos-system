@@ -4,7 +4,7 @@
   programs.kitty = {
     font = {
       name = "FiraCode Nerd Font Mono";
-      size = 12;
+      size = 14;
     };
     themeFile = "Catppuccin-Mocha";
     settings = {

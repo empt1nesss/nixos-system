@@ -10,7 +10,7 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "uinput" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
@@ -30,4 +30,9 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.opentabletdriver.enable = true;
+  hardware.uinput.enable = true;
+
+  hardware.openrazer.enable = true;
 }

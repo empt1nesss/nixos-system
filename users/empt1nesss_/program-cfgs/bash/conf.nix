@@ -12,14 +12,18 @@
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
     '';
-    shellAliases = {
-      ls = "ls --color=auto -A";
-    };
     initExtra = ''
       export OSH="${inputs.oh-my-bash}"
       DISABLE_AUTO_UPDATE="true"
       OSH_THEME="nekolight"
       source "$OSH/oh-my-bash.sh"
+
+      alias ls='ls --color=auto'
+      alias la='ls -A --color=auto'
+      alias ll='ls -lh --color=auto'
+
+      alias rmf='command rm'
+      alias rm='trash-put'
     '';
   };
 }

@@ -1,0 +1,8 @@
+layout {
+    gaps 8
+
+    focus-ring {
+        width 1
+    }
+}
+

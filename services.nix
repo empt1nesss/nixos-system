@@ -6,6 +6,7 @@
     upower.enable = true;
     power-profiles-daemon.enable = true;
     printing.enable = true;
+    input-remapper.enable = true;
   };
 
   # xdg

@@ -2,10 +2,9 @@ layout {
     background-color "transparent"
 
     focus-ring {
-        active-color   "#666666"
-        inactive-color "#919191"
-        urgent-color   "#ffb4ab"
+        active-color   "FFFFFF55"
+        inactive-color "#FFFFFF00"
+        urgent-color   "#FF8EDA66"
     }
-
 }
 

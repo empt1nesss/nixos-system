@@ -38,6 +38,46 @@ in
   };
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Mount another disks
+  fileSystems = {
+    "/mnt/win/C" = {
+      device = "/dev/disk/by-uuid/2E5C8BC85C8B8973";
+      fsType = "ntfs";
+      options = [
+        "defaults"
+        "nofail"
+        "uid=1000"
+        "gid=100"
+        "umask=022"
+      ];
+      noCheck = true;
+    };
+    "/mnt/win/D" = {
+      device = "/dev/disk/by-uuid/4090C30490C30000";
+      fsType = "ntfs";
+      options = [
+        "defaults"
+        "nofail"
+        "uid=1000"
+        "gid=100"
+        "umask=022"
+      ];
+      noCheck = true;
+    };
+    "/mnt/win/E" = {
+      device = "/dev/disk/by-uuid/3CD6D286D6D24036";
+      fsType = "ntfs";
+      options = [
+        "defaults"
+        "nofail"
+        "uid=1000"
+        "gid=100"
+        "umask=022"
+      ];
+      noCheck = true;
+    };
+  };
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #

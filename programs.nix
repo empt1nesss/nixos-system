@@ -10,6 +10,8 @@
     cmake
     ninja
     gnumake
+    openrazer-daemon
+    razergenie
     (import ./program-cfgs/vim/pkg.nix { inherit pkgs; })
   ];
 
@@ -18,5 +20,6 @@
   programs.dms-shell.enable = true;
   programs.dconf.enable = true;
   programs.throne.enable = true;
+  programs.steam.enable = true;
 }
 

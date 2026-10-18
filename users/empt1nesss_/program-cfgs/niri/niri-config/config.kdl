@@ -46,7 +46,7 @@ input {
     }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
-    // warp-mouse-to-focus
+    warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
@@ -76,15 +76,16 @@ layout {
     // - "always", the focused column will always be centered.
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
-    center-focused-column "never"
+    center-focused-column "on-overflow"
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
         // Proportion sets the width as a fraction of the output width, taking gaps into account.
         // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
         // The default preset widths are 1/3, 1/2 and 2/3 of the output.
-        proportion 0.33333
+        proportion 0.35
         proportion 0.5
-        proportion 0.66667
+        proportion 0.65
+        proportion 1.0
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
     }
@@ -112,6 +113,7 @@ layout {
         urgent-color   "#cc4444"      // Softer red
     }
     shadow {
+        on
         softness 30
         spread 5
         offset x=0 y=5
@@ -144,31 +146,34 @@ prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 animations {
     workspace-switch {
-        duration-ms 100
+        spring damping-ratio=0.80 stiffness=523 epsilon=0.0001
     }
     window-open {
-        duration-ms 100
+        duration-ms 150
+        curve "ease-out-expo"
     }
     window-close {
-        duration-ms 100
+        duration-ms 150
+        curve "ease-out-quad"
     }
     horizontal-view-movement {
-        duration-ms 100
+        spring damping-ratio=0.85 stiffness=423 epsilon=0.0001
     }
     window-movement {
-        duration-ms 100
+        spring damping-ratio=0.75 stiffness=323 epsilon=0.0001
     }
     window-resize {
-        duration-ms 100
+        spring damping-ratio=0.85 stiffness=423 epsilon=0.0001
     }
     config-notification-open-close {
-        duration-ms 100
+        spring damping-ratio=0.65 stiffness=923 epsilon=0.001
     }
     screenshot-ui-open {
-        duration-ms 100
+        duration-ms 200
+        curve "ease-out-quad"
     }
     overview-open-close {
-        duration-ms 100
+        spring damping-ratio=0.85 stiffness=800 epsilon=0.0001
     }
 }
 // Window rules let you adjust behavior for individual windows.
@@ -197,18 +202,19 @@ window-rule {
     open-floating false
 }
 window-rule {
-    match app-id=r#"^org\.gnome\.Calculator$"#
     match app-id=r#"^gnome-calculator$"#
     match app-id=r#"^galculator$"#
     match app-id=r#"^blueman-manager$"#
     match app-id=r#"^org\.gnome\.Nautilus$"#
+    // match app-id=r#"^steam$"#
     match app-id=r#"^xdg-desktop-portal$"#
     open-floating true
 }
 window-rule {
-    match app-id=r#"^steam$"# title=r#"^notificationtoasts_\d+_desktop$"#
-    default-floating-position x=10 y=10 relative-to="bottom-right"
-    open-focused false
+  match app-id=r#"^steam$"# title="notificationtoasts.*$"
+  open-floating true
+  open-focused false
+  default-floating-position x=4 y=4 relative-to="bottom-right"
 }
 window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
@@ -219,9 +225,63 @@ window-rule {
     draw-border-with-background false
 }
 window-rule {
+    match is-active=false
+    opacity 0.99
+}
+window-rule {
+    match app-id=r#"Firefox$"#
+    match app-id=r#"figma-linux$"#
+    match app-id="zen"
+    match app-id="firefox"
+    match app-id="REAPER"
+    default-column-width { proportion 1.0; }
+    open-floating false
+}
+window-rule {
+    match app-id=r#"discord$"#
+    default-column-width { proportion 0.65; }
+    open-floating false
+}
+window-rule {
+    match app-id=r#"telegram\.desktop$"#
+    default-column-width { proportion 0.35; }
+    open-floating false
+}
+window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id="zoom"
+    match app-id=r#"discord$"# title="Discord Updater$"
     open-floating true
+}
+window-rule {
+    match app-id=r#"kitty-floating$"#
+    open-floating true
+    default-column-width { proportion 0.5; }
+    default-window-height { proportion 0.6; }
+}
+window-rule {
+    match app-id=r#"Throne$"#
+    open-floating true
+    default-column-width { proportion 0.6; }
+    default-window-height { proportion 0.7; }
+}
+window-rule {
+    match title="Volume Control$"
+    match app-id=r#"obsproject\.Studio$"#
+    match title="OpenTabletDriver.*$"
+    match app-id=r#"nwg-look$"#
+    match app-id=r#"qBittorrent$"#
+    open-floating true
+}
+// Open dms windows as floating by default
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    open-floating true
+}
+window-rule {
+    match app-id=r#"cs2$"#
+    match app-id=r#"osu!$"#
+    open-fullscreen true
 }
 debug {
     honor-xdg-activation-with-invalid-serial
@@ -230,8 +290,8 @@ debug {
 // Override to disable super+tab
 recent-windows {
     binds {
-        Alt+Tab         { next-window scope="output"; }
-        Alt+Shift+Tab   { previous-window scope="output"; }
+        Alt+Tab         { next-window scope="all"; }
+        Alt+Shift+Tab   { previous-window scope="all"; }
         Alt+grave       { next-window filter="app-id"; }
         Alt+Shift+grave { previous-window filter="app-id"; }
     }
@@ -247,5 +307,8 @@ include optional=true "dms/cursor.kdl"
 include optional=true "dms/input.kdl"
 include "dms/windowrules.kdl"
 
-// Include custom config files
+// Include custom config
 include "custom/colors.kdl"
+include "custom/layout.kdl"
+include "custom/blur.kdl"
+

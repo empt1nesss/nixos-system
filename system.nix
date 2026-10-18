@@ -18,4 +18,10 @@
     "\eOA": history-search-backward
     "\eOB": history-search-forward
   '';
+
+  qt = {
+    enable = true;
+    style = "adwaita-dark";
+  };
 }
+

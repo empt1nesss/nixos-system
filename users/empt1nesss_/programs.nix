@@ -36,6 +36,7 @@
     ethtool
     pciutils
     usbutils
+    trash-cli
 
     # fonts
     nerd-fonts.fira-code
@@ -53,6 +54,9 @@
     # development
     neovim
     llvmPackages.clang-tools
+
+    # games
+    osu-lazer-bin
   ];
 
   programs.bash.enable = true;
