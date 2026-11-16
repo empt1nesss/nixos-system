@@ -90,12 +90,6 @@
         {
           "id": "workspaceSwitcher",
           "enabled": true
-        }
-      ],
-      "centerWidgets": [
-        {
-          "id": "music",
-          "enabled": true
         },
         {
           "id": "runningApps",
@@ -104,6 +98,12 @@
           "runningAppsGroupByApp": true,
           "runningAppsCurrentWorkspace": true,
           "runningAppsCurrentMonitor": true
+        }
+      ],
+      "centerWidgets": [
+        {
+          "id": "music",
+          "enabled": true
         },
         {
           "id": "focusedWindow",

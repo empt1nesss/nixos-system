@@ -60,5 +60,6 @@
   programs.firefox.enable = true;
   programs.git.enable = true;
   programs.kitty.enable = true;
+  programs.libreoffice.enable = true;
 }
 
