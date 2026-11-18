@@ -51,7 +51,6 @@
     discord
 
     # development
-    neovim
     llvmPackages.clang-tools
   ];
 

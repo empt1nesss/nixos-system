@@ -18,22 +18,28 @@
       url = "github:ohmybash/oh-my-bash";
       flake = false;
     };
+    nixvim.url = "github:nix-community/nixvim";
+    nixvimcfg = {
+      url = "path:./program-cfgs/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixvim.follows = "nixvim";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, nix-doom-emacs-unstraightened, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nur, nix-doom-emacs-unstraightened, nixvim, nixvimcfg, ... }@inputs: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-	        ./configuration.nix
-	        home-manager.nixosModules.home-manager
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
               users.empt1nesss_ = ./users/empt1nesss_/home.nix;
-	            backupFileExtension = "bkp";
+              backupFileExtension = "bkp";
             };
             nixpkgs.overlays = [
               (final: prev: {
@@ -41,7 +47,7 @@
               })
             ];
           }
-	      ];
+        ];
       };
     };
   };

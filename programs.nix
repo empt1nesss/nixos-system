@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -11,6 +11,7 @@
     ninja
     gnumake
     (import ./program-cfgs/vim/pkg.nix { inherit pkgs; })
+    inputs.nixvimcfg.packages.${stdenv.hostPlatform.system}.default
   ];
 
   programs.git.enable = true;
