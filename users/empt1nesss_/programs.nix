@@ -55,7 +55,6 @@
   ];
 
   programs.bash.enable = true;
-  programs.doom-emacs.enable = true;
   programs.firefox.enable = true;
   programs.git.enable = true;
   programs.kitty.enable = true;

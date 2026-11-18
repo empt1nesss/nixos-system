@@ -10,10 +10,6 @@
     nur = {
       url = "github:nix-community/NUR";
     };
-    nix-doom-emacs-unstraightened = {
-      url = "github:marienz/nix-doom-emacs-unstraightened";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     oh-my-bash = {
       url = "github:ohmybash/oh-my-bash";
       flake = false;
@@ -26,7 +22,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, nix-doom-emacs-unstraightened, nixvim, nixvimcfg, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nur, nixvim, nixvimcfg, ... }@inputs: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };

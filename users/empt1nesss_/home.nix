@@ -15,7 +15,7 @@ in
     ++ programCfgsImports;
 
   home.sessionVariables = {
-    # EDITOR = "nvim";
+    EDITOR = "nvim";
   };
 
   gtk = {
