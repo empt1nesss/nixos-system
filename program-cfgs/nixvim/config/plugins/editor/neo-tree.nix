@@ -18,8 +18,31 @@
       ];
       add_blank_line_at_top = false;
 
+      event_handlers = [
+        {
+          event = "neo_tree_window_after_open";
+          handler.__raw = ''
+            function(args)
+              if args.position == "left" or args.position == "right" then
+                vim.cmd("horizontal wincmd =")
+              end
+            end
+          '';
+        }
+        {
+          event = "neo_tree_window_after_close";
+          handler.__raw = ''
+            function(args)
+              if args.position == "left" or args.position == "right" then
+                vim.cmd("horizontal wincmd =")
+              end
+            end
+          '';
+        }
+      ];
+
       filesystem = {
-        bind_to_cwd = false;
+        bind_to_cwd = true;
         hijack_netrw_behavior = "open_current";
 
         follow_current_file = {

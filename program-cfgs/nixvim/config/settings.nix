@@ -14,6 +14,41 @@
         vim.opt.incsearch = true
         vim.opt.hlsearch = true
         vim.opt.shortmess:remove("S")
+        do
+          local function insert_at_selection(at_end)
+            local anchor = vim.fn.getpos("v")
+            local cursor = vim.fn.getpos(".")
+
+            local forward =
+              cursor[2] > anchor[2]
+              or (
+                cursor[2] == anchor[2]
+                and cursor[3] >= anchor[3]
+              )
+
+            if at_end then
+              -- Move to the right/bottom end of the selection.
+              return forward and "<Esc>a" or "o<Esc>a"
+            end
+
+            -- Move to the left/top start of the selection.
+            return forward and "o<Esc>i" or "<Esc>i"
+          end
+
+          vim.keymap.set("x", "i", function()
+            return insert_at_selection(false)
+          end, {
+            expr = true,
+            desc = "Insert before Visual selection",
+          })
+
+          vim.keymap.set("x", "a", function()
+            return insert_at_selection(true)
+          end, {
+            expr = true,
+            desc = "Append after Visual selection",
+          })
+        end
       '';
 
     clipboard = {
