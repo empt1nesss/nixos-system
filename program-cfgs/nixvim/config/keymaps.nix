@@ -265,9 +265,31 @@
     {
       mode = "n";
       key = "<leader>cd";
-      action = "vim.diagnostic.open_float";
+      action = "<cmd>lua vim.diagnostic.open_float({ scope = 'line' })<CR>";
       options = {
         desc = "Line Diagnostics";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>cf";
+      action.__raw = ''
+        function()
+          vim.lsp.buf.format({ async = true })
+        end
+      '';
+      options = {
+        desc = "Format entire file";
+        silent = true;
+      };
+    }
+    {
+      mode = "x";
+      key = "<leader>cf";
+      action = "<Esc><Cmd>lua vim.lsp.buf.format({ async = true, range = { ['start'] = vim.api.nvim_buf_get_mark(0, '<'), ['end'] = vim.api.nvim_buf_get_mark(0, '>') } })<CR>";
+      options = {
+        desc = "Format selection";
+        silent = true;
       };
     }
     {
