@@ -28,6 +28,7 @@ _: {
     ./plugins/editor/todo-comments.nix
     ./plugins/editor/navic.nix
     ./plugins/editor/sudo.nix
+    ./plugins/editor/remote-sshfs.nix
 
     # UI plugins
     ./plugins/ui/bufferline.nix

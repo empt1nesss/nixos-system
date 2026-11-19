@@ -83,6 +83,15 @@
         desc = "Delete buffer";
       };
     }
+    {
+      mode = "n";
+      key = "<leader>bn";
+      action = "<cmd>enew<CR>";
+      options = {
+        desc = "New buffer";
+        silent = true;
+      };
+    }
 
     {
       mode = "n";

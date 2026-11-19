@@ -357,7 +357,8 @@
         "nixvim": [
           "nixvim"
         ],
-        "pre-commit-hooks": "pre-commit-hooks"
+        "pre-commit-hooks": "pre-commit-hooks",
+        "remote-sshfs": "remote-sshfs"
       },
       "locked": {
         "path": "./program-cfgs/nixvim",
@@ -420,6 +421,22 @@
       "original": {
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
+        "type": "github"
+      }
+    },
+    "remote-sshfs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775361875,
+        "narHash": "sha256-ca6DcLR/6HTRdJCinnQWE52VMDxY82cRSqJ7uJFbp9w=",
+        "owner": "nosduco",
+        "repo": "remote-sshfs.nvim",
+        "rev": "7a12a1677bbe96ca98f0c713448ac1f518ba09b7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nosduco",
+        "repo": "remote-sshfs.nvim",
         "type": "github"
       }
     },

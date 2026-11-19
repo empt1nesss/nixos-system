@@ -30,6 +30,10 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    remote-sshfs = {
+      url = "github:nosduco/remote-sshfs.nvim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -70,6 +74,7 @@
               archlens = inputs.archlens.packages.${system}.default;
               mdRender = inputs.md-render;
               mmdr = inputs.mmdr.packages.${system}.default;
+              remoteSshfs = inputs.remote-sshfs;
             };
           };
           nvim = nixvim'.makeNixvimWithModule nixvimModule;
