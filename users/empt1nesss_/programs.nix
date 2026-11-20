@@ -45,6 +45,7 @@
 
     # work
     blender
+    reaper
 
     # social
     telegram-desktop
@@ -52,6 +53,8 @@
 
     # development
     llvmPackages.clang-tools
+    cargo
+    rustc
   ];
 
   programs.bash.enable = true;

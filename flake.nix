@@ -14,15 +14,10 @@
       url = "github:ohmybash/oh-my-bash";
       flake = false;
     };
-    nixvim.url = "github:nix-community/nixvim";
-    nixvimcfg = {
-      url = "path:./program-cfgs/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixvim.follows = "nixvim";
-    };
+    nixvim.url = "github:empt1nesss/nvim/nixvim";
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, nixvim, nixvimcfg, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nur, nixvim, ... }@inputs: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
@@ -38,6 +33,7 @@
               backupFileExtension = "bkp";
             };
             nixpkgs.overlays = [
+              inputs.nixvim.overlays.default
               (final: prev: {
                 firefoxAddons = nur.legacyPackages.${final.stdenv.hostPlatform.system}.repos.rycee.firefox-addons;
               })

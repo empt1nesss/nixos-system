@@ -11,7 +11,7 @@
     ninja
     gnumake
     (import ./program-cfgs/vim/pkg.nix { inherit pkgs; })
-    inputs.nixvimcfg.packages.${stdenv.hostPlatform.system}.default
+    nixvim
   ];
 
   programs.git.enable = true;
